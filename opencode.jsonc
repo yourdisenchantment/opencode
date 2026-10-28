@@ -9,9 +9,10 @@
   // V1 `small_model` has no direct equivalent: use per-agent model instead.
   // "shell": "",
   // V1 `logLevel` is unsupported in V2: use OPENCODE_LOG_LEVEL env var instead.
-  // Tool-independent rules shared with other agents (see AGENTS.md for the split).
+  // Tool-independent rules shared with other agents: CORE.md (general, Russian)
+  // and RULES.md (coding layer). See AGENTS.md for the split.
   // Absolute on purpose: a relative path is searched upward from the project.
-  "instructions": ["~/.config/opencode/RULES.md"],
+  "instructions": ["~/.config/opencode/CORE.md", "~/.config/opencode/RULES.md"],
   // V1 `enabled_providers` / `disabled_providers` have no direct V2 fields.
   // Same behavior via policies: deny everything, then allow opencode.
   "policies": [

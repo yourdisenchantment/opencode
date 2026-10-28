@@ -91,7 +91,7 @@ await Promise.all(
 )
 
 // 4. References between the pieces resolve.
-const referencing = [...agents, ...commands, ...skills, "AGENTS.md", "RULES.md"]
+const referencing = [...agents, ...commands, ...skills, "AGENTS.md", "RULES.md", "CORE.md"]
 await Promise.all(
   referencing.map(async (file) => {
     const content = await text(file)

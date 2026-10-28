@@ -9,7 +9,8 @@ opencode releases. It lives in `~/.config/opencode/`.
 | --- | --- |
 | `opencode.jsonc` | Main config: provider policy, permission rules, MCP servers, experimental flags |
 | `cli.json` | Client settings: theme, mouse, scroll, attention sounds |
-| `RULES.md` | Tool-independent global rules (single source; opencode loads it via `instructions`, other tools can import it) |
+| `CORE.md` | General rules for any task, in Russian (single source for Claude Code, opencode and chats) |
+| `RULES.md` | Coding layer on top of `CORE.md`: code style, hard constraints, git, verification |
 | `AGENTS.md` | opencode-specific part: how rules are enforced, subagents, commands, workflow |
 | `agents/` | Subagents: `coder`, `reviewer`, `commit-collector` |
 | `commands/` | Slash commands (`/verify`, `/review`, `/commit`, ...) |

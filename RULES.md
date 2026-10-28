@@ -1,89 +1,29 @@
-# Global rules (tool-independent)
+# Coding rules (tool-independent)
 
-Personal rules for any coding agent. Setup that belongs to one tool lives in
-that tool's own file (for opencode: `AGENTS.md` next to this file). Project
-rules are additive: a project's own rules file extends these, it does not
-replace them.
+The coding layer of my personal rules, for any coding agent. It adds to
+`CORE.md` (language, answer style, general principles, honesty, errors, when to
+ask), which always applies as well; this file does not repeat it. Setup that
+belongs to one tool lives in that tool's own file (for opencode: `AGENTS.md`
+next to this file). Project rules are additive: a project's own rules file
+extends these, it does not replace them.
 
----
+## Coding Principles
 
-## Communication
+These make the general principles from `CORE.md` concrete for code.
 
-- Respond in Russian by default, whatever language my prompt is in. Use another
-  language only when I ask for it explicitly. Code and its contents stay in the
-  project's language (usually English), with English comments and docstrings
-  (see "Code Style" below).
-- No filler, no "Great question!"-style preambles. Short and to the point.
-- Default to economical output - balance clarity and brevity. Cut preambles,
-  restating my question, process narration, and redundant summaries; prefer
-  bullets / tables over prose. Keep the signal - the answer, the "why" for
-  non-trivial calls, the options, exact code / commands.
-  Brevity serves clarity, it does not replace it: never drop an explanation I
-  need just to save tokens.
-- If a task is vague - ask, do not guess.
-- If there is a choice between options - show 2-3 with explanations, do not
-  silently pick one.
-
-## Working Principles
-
-### 1. Think Before Coding
-
-- State assumptions explicitly. If unsure - ask.
-- If the task can be interpreted in several ways - surface them, do not pick
-  silently.
-- If a simpler approach exists - say so. Push back when warranted.
-- If something is unclear - stop. Name what is confusing. Ask.
-
-### 2. Simplicity First
-
-- Minimum code that solves the task. No "for the future" abstractions.
-- No abstractions for a single call site.
-- No "flexibility" or "configurability" that was not requested.
-- No error handling for impossible scenarios.
-- If you wrote 200 lines and 50 would do - rewrite.
-
-Test: "Would a senior engineer call this overcomplicated?" - if yes, simplify.
-
-### 3. Surgical Edits
-
-- Touch only what relates to the task.
-- Do not "improve" adjacent code, comments, or formatting.
-- Do not refactor what is not broken.
-- Match the style of the existing file, even if you would have done it
-  differently.
-- If you spot someone else's dead code - mention it, do not delete it.
-
-When your edits make something redundant:
-- Remove imports / variables / functions that YOUR changes made unnecessary.
-- Do not touch pre-existing dead code.
-
-Test: every changed line must follow directly from the task.
-
-### 4. Goal as a Verifiable Criterion
-
-Turn tasks into verifiable goals:
-- "Add validation" - "write tests for invalid inputs, run them, get green"
-- "Fix a bug" - "write a reproducing test, run it, get green"
-- "Refactor X" - "make sure tests pass before and after"
-
-For multi-step tasks - a short plan:
-1. [step] - verify: [how]
-2. [step] - verify: [how]
-
-Strong criteria enable autonomous work. Weak ones ("make it work") lead to
-constant clarifications.
-
-## Honesty and Uncertainty
-
-Calibrated honesty beats sounding confident - especially in R&D/ML work, where
-a fabricated API or metric costs more than an "I don't know".
-
-- Never invent APIs, flags, signatures, library behavior, file paths, benchmark
-  numbers, or results. If unsure - verify (read the file, run it, look it up) or
-  say you are unsure and name what would confirm it.
-- Separate what you verified from what you assume; mark assumptions as such.
-- "I don't know" / "this needs checking" is a valid and preferred answer over a
-  confident guess.
+- Minimum code that solves the task. No abstractions for a single call site, no
+  "flexibility" or "configurability" that was not requested, no error handling
+  for impossible scenarios. If you wrote 200 lines and 50 would do - rewrite.
+  Test: "Would a senior engineer call this overcomplicated?"
+- Touch only what the task needs. Do not "improve" adjacent code, comments or
+  formatting, and do not refactor what is not broken. Match the style of the
+  existing file. If you spot someone else's dead code - mention it, do not
+  delete it. Remove only the imports / variables / functions that YOUR changes
+  made unnecessary. Test: every changed line follows directly from the task.
+- Turn tasks into checks that can run: "add validation" -> tests for invalid
+  inputs, run, green; "fix a bug" -> a reproducing test, run, green;
+  "refactor X" -> tests pass before and after. For multi-step work, a short plan
+  of "step - how it is verified".
 - Docs and rules files (READMEs, comments, rule files like this one) can lag the
   code. The executable files - `package.json`, `pyproject.toml`, config, hooks,
   the source itself - are the source of truth; when prose and code disagree,
@@ -93,11 +33,8 @@ a fabricated API or metric costs more than an "I don't know".
 
 - Comments and docstrings in source files are in English. Docstrings follow
   google-style (Args / Returns / Raises).
-- Source files use only ASCII and Russian letters. Use a hyphen "-" instead of
-  the en dash and the em dash.
-- The Russian letter yo (the "e" with two dots above it) is never used - always
-  the plain Cyrillic letter ie. It is not used in code, comments, communication,
-  or this file.
+- Source files use only ASCII and Russian letters; dashes, the letter yo and
+  other special characters follow the symbol rules in `CORE.md`.
 - Avoid diacritics and umlauts in every language (write plain a / o / u / c / e,
   not their accented forms) - keep to characters typable on a standard keyboard
   so the encoding never breaks.
@@ -158,22 +95,12 @@ version without an explicit command.
 For complex operations (conflict, rebase, force push, rollback) - break down
 step by step with risks at each step. Do not run them yourself.
 
-## When to Ask, When to Act
+## When to Ask in Code Work
 
-Ask if:
-- Several reasonable interpretations of the task exist.
+In addition to the general rules in `CORE.md`, ask if:
 - The choice affects architecture or other people's modules.
 - You need to delete / commit / push / deploy / reinstall dependencies.
-- You are unsure about a style that is not described above.
-
-Look before you ask: if the code, config, docs or earlier context answer the
-question, read them first. Ask only what they cannot answer, and make it the one
-question whose answer would change the work the most.
-
-Just do it if:
-- The task is unambiguous and local.
-- The method is described here or in the project's own rules file.
-- The decision can be reverted with one command.
+- You are unsure about a code style that is not described here.
 
 ## Working with Tools
 
@@ -232,20 +159,10 @@ order.
 - At the end of a complex task - a short report: what was done, how it was
   verified (command and result), what is left / not done and why.
 
-## Errors in Work
+## Learning
 
-Surface every error (missing module, failed test, no access, ...) in the
-output: one sentence "error: <brief>", the cause if understood, what you did
-about it. If you could not fix it - say so and stop. Silent workarounds are
-forbidden.
-
-## Professional Development
-
-I am learning through these tasks, especially in personal projects:
-
-- For non-trivial decisions, give one or two sentences on why this path over the
-  alternatives.
-- In personal projects, when a concept is likely unfamiliar, briefly explain it
-  and show alternatives with pros and cons instead of just inserting code.
-- After an error, add how to avoid it next time.
-- Name the commands, flags and APIs you used so I remember them.
+I am learning through these tasks, especially in personal projects. After an
+error, add how to avoid it next time. Name the commands, flags and APIs you
+used so I remember them. In personal projects, when a concept is likely
+unfamiliar, explain it and show alternatives with pros and cons instead of just
+inserting code.

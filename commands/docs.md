@@ -1,5 +1,5 @@
 ---
-description: Show the user's opencode config structure - list of agents, commands, skills, plus opencode.jsonc, cli.json, AGENTS.md, RULES.md. With an argument, print the named file in full.
+description: Show the user's opencode config structure - list of agents, commands, skills, plus opencode.jsonc, cli.json, AGENTS.md, CORE.md, RULES.md. With an argument, print the named file in full.
 ---
 
 Print a documentation snapshot of the opencode config that the user keeps
@@ -18,7 +18,8 @@ Show:
    - `opencode.jsonc` - main config (permission rules, MCP servers, etc.)
    - `cli.json` - client/TUI settings (theme, scroll, mouse, attention)
    - `AGENTS.md` - opencode-specific global rules loaded into every session
-   - `RULES.md` - tool-independent global rules, loaded via `instructions`
+   - `CORE.md` - general rules for any task (Russian), loaded via `instructions`
+   - `RULES.md` - coding layer on top of `CORE.md`, loaded via `instructions`
 
 2. **Subagents** (from `agents/<name>.md`) - name + `description` from
    frontmatter + 1-line summary of what the agent does.

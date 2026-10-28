@@ -1,9 +1,10 @@
 # Global opencode rules
 
-The opencode-specific part of my personal rules. The tool-independent rules
-(communication, principles, honesty, code style, hard constraints, git,
-verification, review feedback, ...) are in `RULES.md` in this folder and are
-loaded through `instructions` in `opencode.jsonc`. Applied to all sessions
+The opencode-specific part of my personal rules. The tool-independent rules are
+in this folder and are loaded through `instructions` in `opencode.jsonc`:
+`CORE.md` (language, answer style, general principles, honesty, errors, when to
+ask - for any task) and `RULES.md` (the coding layer: code style, hard
+constraints, git, verification, review feedback). Applied to all sessions
 unless the project has its own `AGENTS.md` (then the project file is additive,
 not a replacement).
 
