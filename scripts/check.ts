@@ -36,6 +36,13 @@ function checkRules(file: string, rules: unknown) {
 const jsonc = Bun.JSONC.parse(await text("opencode.jsonc")) as Record<string, any>
 checkRules("opencode.jsonc", jsonc.permissions)
 Bun.JSONC.parse(await text("cli.json"))
+// Extra instruction files must exist; `~` is expanded the way opencode expands it.
+await Promise.all(
+  (jsonc.instructions ?? []).map(async (entry: string) => {
+    const file = entry.startsWith("~/") ? path.join(process.env.HOME ?? "", entry.slice(2)) : entry
+    if (!(await Bun.file(file).exists())) problem(`opencode.jsonc: instructions file not found: ${entry}`)
+  }),
+)
 Object.entries(jsonc.mcp?.servers ?? {}).forEach(([name, server]: [string, any]) => {
   if (JSON.stringify(server.command ?? "").includes("@latest")) warnings.push(`mcp ${name}: unpinned @latest`)
 })
@@ -84,7 +91,7 @@ await Promise.all(
 )
 
 // 4. References between the pieces resolve.
-const referencing = [...agents, ...commands, ...skills, "AGENTS.md"]
+const referencing = [...agents, ...commands, ...skills, "AGENTS.md", "RULES.md"]
 await Promise.all(
   referencing.map(async (file) => {
     const content = await text(file)

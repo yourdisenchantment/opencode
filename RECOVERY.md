@@ -1,7 +1,7 @@
 # opencode recovery notes
 
 Not loaded into sessions. The agent reads this file only when opencode fails to
-start because of a broken config, `AGENTS.md`, or plugin, and tells me which
+start because of a broken config, `AGENTS.md`, `RULES.md`, or plugin, and tells me which
 variable to try. The agent never sets these itself.
 
 | Env var | Effect |
