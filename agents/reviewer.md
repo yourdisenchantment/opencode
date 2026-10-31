@@ -21,6 +21,9 @@ permissions:
     resource: "tmp/REVIEW.md"
     effect: allow
   - action: edit
+    resource: "tmp/JOURNAL.md"
+    effect: allow
+  - action: edit
     resource: "test/*"
     effect: allow
   - action: edit
@@ -110,6 +113,11 @@ produced by the main agent (build).
 - Record findings in `tmp/REVIEW.md` following the `workspace-docs` skill:
   append to the open round if it has unresolved items, start a fresh file once
   all previous fixes are done.
+- Journal (mandatory): before your first action read the tail of
+  `tmp/JOURNAL.md` (project root, if it exists) and state in one line which
+  entry you continue from. After every meaningful action, assumption, fact or
+  decision (including tests written and their results), append one ship-log
+  entry before returning to the main agent.
 
 ## What You Do NOT Do
 

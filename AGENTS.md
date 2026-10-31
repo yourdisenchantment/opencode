@@ -111,6 +111,27 @@ Session helper files (`ROADMAP.md`, `TASK.md`, `REVIEW.md`, `OVERVIEW.md`,
 `commits/`) live in `tmp/` (gitignored, survive across sessions); the
 `workspace-docs` skill defines their format.
 
+## Agent Ship's Log
+
+Every project keeps `tmp/JOURNAL.md` (gitignored, survives across sessions).
+It is mandatory for every agent:
+
+- Before the first action, read the tail of `tmp/JOURNAL.md` (if it exists)
+  and state in one line which entry you are continuing from. Create the file
+  on first use if it is missing (header plus the format from the `ship-log`
+  skill).
+- After every meaningful action, assumption, fact, insight or decision, append
+  one entry before reporting to the user. Read-only discovery that taught you
+  something counts as meaningful.
+- Entries are chronological, append-only, never rewritten; corrections are
+  appended as new entries.
+- Record the session id in each entry header for traceability.
+- See the `ship-log` skill for the full format, examples and the "do not
+  write" rules.
+
+The project files `ROADMAP.md`, `TASK.md`, `REVIEW.md`, `OVERVIEW.md` keep
+the structured plan; the journal is the continuous narrative counterpart.
+
 ## Recovery
 
 If opencode refuses to start because of a broken config, `AGENTS.md`, `RULES.md`

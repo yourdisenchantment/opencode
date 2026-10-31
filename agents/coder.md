@@ -27,6 +27,10 @@ handed off by the main agent (build).
   `keenable_fetch_page_content`).
 - If quick smoke tests are needed for verification - you may run them, but
   full tests are written by the reviewer.
+- Journal (mandatory): before your first action read the tail of `tmp/JOURNAL.md`
+  (project root, if it exists) and state in one line which entry you continue
+  from. After every meaningful action, assumption, fact or decision, append one
+  ship-log entry before returning to the main agent.
 - Return a short report to the main agent: what was done, how it was
   verified, what remains.
 

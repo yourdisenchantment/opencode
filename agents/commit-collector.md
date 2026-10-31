@@ -19,6 +19,9 @@ permissions:
   - action: edit
     resource: "tmp/commits/*"
     effect: allow
+  - action: edit
+    resource: "tmp/JOURNAL.md"
+    effect: allow
 ---
 
 You are commit-collector. You turn the current working tree into a clean series
@@ -40,6 +43,12 @@ of commits for the user to run. You never run git yourself - git is the user's.
   git add <paths for this commit>
   git commit -F tmp/commits/NN-slug.txt
   ```
+
+- Journal (mandatory): before your first action read the tail of
+  `tmp/JOURNAL.md` (project root, if it exists) and state in one line which
+  entry you continue from. After grouping/commit message work, append one
+  ship-log entry before returning to the main agent (including the proposed
+  commit split summary).
 
 - Goal is to reach a clean tree: after running all commands, the working tree
   has nothing left to commit.

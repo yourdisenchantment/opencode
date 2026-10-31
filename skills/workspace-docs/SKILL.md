@@ -47,6 +47,16 @@ Status markers used across the files: `[ ]` todo, `[~]` in progress, `[x]` done,
   known issues.
 - Refresh it at the end of a work chunk or session. Do not invent progress.
 
+## tmp/JOURNAL.md - the ship's log
+
+- Continuous narrative across sessions, agents and models: what was done, found,
+  decided, verified. Every agent reads its tail before acting and appends after
+  each meaningful step.
+- Complements (does not duplicate) ROADMAP/TASK/REVIEW/OVERVIEW - reference
+  those by path instead of copying them.
+- The `ship-log` skill defines format and write rules; create the file on first
+  use (header plus format).
+
 ## tmp/handoff-<date>-<slug>.md - session handoff
 
 - Written by the `handoff` skill for a fresh agent to continue the work. It
