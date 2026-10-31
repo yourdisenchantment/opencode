@@ -27,7 +27,6 @@ opencode releases. It lives in `~/.config/opencode/`.
 
 ## Working on this config
 
-- Check it after every change: `bun scripts/check.ts` (exit code 1 on problems).
 - Restart opencode after a change; running sessions keep the config they loaded.
 - Agent rules are appended after the global permission rules and the last match
   wins, so agents list only deviations. A blanket `allow` there lifts every
