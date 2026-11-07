@@ -12,29 +12,20 @@ not a replacement).
 
 ## How the rules are enforced here
 
-The full permission policy lives in `~/.config/opencode/opencode.jsonc` under
-`permissions` (ordered rules, the last match wins). `RULES.md` states what I
-agree on; this is how opencode backs it up:
+The agreements themselves live in `RULES.md` ("Hard Constraints" and the rest).
+opencode backs them up with the ordered `permissions` list in
+`~/.config/opencode/opencode.jsonc` (last match wins): destructive shell commands,
+shells used as interpreters (`sh`/`bash`/...), privileged commands (`sudo`...)
+and global installs are denied; secrets are denied for every action; `git push`
+and outside-project access are asks. The full mapping is in the config itself -
+its comments explain each rule's intent, so go there instead of restating rules
+here.
 
-- Deleting and moving files: `rm`, `rmdir`, `trash`, `unlink`, `shred`,
-  `git rm`, `find -delete`, `mv` are `deny`; `cp` and `rsync` are `ask`, `scp`
-  is `deny`. Editing through the `edit` tool is the sanctioned way to change
-  file contents.
-- Outside the project: `external_directory` is `ask`. The agent waits for my
-  reply.
-- Privileged commands: `sudo`, `su`, `doas` are `deny`.
-- Shells: `sh`, `bash`, `zsh`, `fish` are `deny` as a top-level command (the
-  matcher splits on `;` `|` `&` `&&` `||`, so `curl ... | sh` is blocked at the
-  `sh` part). Use `python3`, `node` or `bun` for scripts.
-- Secrets: `.env*`, keys, `~/.ssh`, `~/.aws`, `~/.gcp`, `~/.gnupg`, `.netrc`
-  and this folder's `service.json` are `deny`; `*.env.example` is readable.
-- Git: read-only commands are allowed, `git push` is `ask`, everything that
-  changes repository state and every force push is `deny`.
-- Global installs (`npm i -g`, `bun add -g`, `pip install`, ...) are `deny`.
-
-Agent files (`agents/*.md`) are appended after the global rules, so they list
-only deviations. The built-in `plan`, `explore` and `general` limits are
-restored in the `agents` block of `opencode.jsonc`.
+- The `chrome-devtools` MCP server is pinned to a version in `opencode.jsonc`.
+  Bump it on purpose when you want a newer one.
+- Agent files (`agents/*.md`) are appended after the global rules, so they list
+  only deviations. The built-in `plan`, `explore` and `general` limits are
+  restored in the `agents` block of `opencode.jsonc`.
 
 ## Working with Tools
 

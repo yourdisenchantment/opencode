@@ -31,17 +31,8 @@ These make the general principles from `CORE.md` concrete for code.
 
 ## Code Style
 
-- Comments and docstrings in source files are in English. Docstrings follow
-  google-style (Args / Returns / Raises).
-- Source files use only ASCII and Russian letters; dashes, the letter yo and
-  other special characters follow the symbol rules in `CORE.md`.
-- Avoid diacritics and umlauts in every language (write plain a / o / u / c / e,
-  not their accented forms) - keep to characters typable on a standard keyboard
-  so the encoding never breaks.
-- No decorative frames or banners in comments. Only simple single-line ones.
-- Identifiers, file names, commit messages - in English.
-- Match the style of the existing file. Do not reformat someone else's work
-  without an explicit request.
+Code style rules (language, symbols, naming, comments) live in the
+`code-style` skill: invoke it when writing or editing code.
 
 ## Hard Constraints
 
@@ -82,11 +73,9 @@ Everything that changes repository state (`add`, `commit`, `pull`, `merge`,
 `rebase`, `reset`, `checkout`, `stash`, branch / tag / remote / config writes,
 force push, `npm publish`) is not allowed.
 
-**Instead, propose a plan:** follow the `commit-message` skill. It defines the
-message format, the split into commits, and the `tmp/commits/NN-slug.txt`
-files. Hand over copy-paste commands per commit: `git add <paths>`, then
-`git commit -F tmp/commits/NN-slug.txt`. If the project uses commitlint /
-Conventional Commits - follow the convention (`feat:`, `fix:`, `chore:`, etc.).
+**Instead, propose a plan:** follow the `commit-message` skill for the message
+format and the commit split; hand over copy-paste commands per commit for me to
+run.
 
 Before committing, verify that staged files do not intersect with `.gitignore`
 (otherwise lint-staged fails with "paths ignored"). Do not bump the package
@@ -141,10 +130,8 @@ order.
 
 - If the result can be verified (test, linter, running a script) - verify it
   yourself before reporting.
-- Find the project's verify chain and run it in order before reporting -
-  typically lint -> typecheck -> tests -> build (e.g. `ruff check` -> `pyright`
-  -> `pytest`, or `lint` -> `format:check` -> `astro check` -> `build`). All
-  steps must pass; report the first that fails.
+- Find the project's verify chain and run it in order before reporting; all
+  steps must pass, report the first that fails.
 - Do not assume pytest and a `tests/` directory by default. Determine the
   project's actual testing approach (notebooks, manual runs, scripts). Do not
   create a `tests/` directory without a request.
