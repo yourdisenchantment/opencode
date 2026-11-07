@@ -16,13 +16,17 @@
         "~/.config/opencode/CORE.md",
         "~/.config/opencode/RULES.md"
     ],
-    // Experimental features (2026-10-31, opencode 2.2.3): all of these are
-    // now supported releases. media_blob required v2.1.4+ (works here).
+    // Experimental features (2026-11-07, opencode 2.2.5). Every flag set to
+    // true is on on purpose: release builds default them off.
+    // portable_shell_scanner removed 2026-11-07: deprecated no-op, the shell
+    // permission scanner is always enabled in v2.2.5.
     "experimental": {
         "todo": true,
-        "portable_shell_scanner": true,
         "background_compaction": true,
         "media_blob": true,
+        "schedules": true,
+        "image_generate": true,
+        "artifacts": true,
     },
     // Was V1 `reserved`; V1 `prune` has no V2 equivalent (checkpoint-based now).
     "compaction": {
