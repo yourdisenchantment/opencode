@@ -29,6 +29,10 @@ requirements, and the files / diff to check - not this session's history.
    append to the open round if it still has unresolved items, or start a fresh
    file if all previous fixes are done.
 
+If the user asked for a branch- or PR-scale review against a fixed point
+("review since X"), prefer the `code-review` skill instead: two axes
+(Standards + Spec), parallel subagents.
+
 When it reports back, check the findings against the code (see "Handling Review
 Feedback" in the global `AGENTS.md`) and show me the verified list. Do NOT edit
 production code; if I ask for fixes, show a plan first and route them to

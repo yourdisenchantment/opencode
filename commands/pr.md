@@ -19,7 +19,9 @@ Compose a Pull Request description from the diff above following the
 
 - Title: one English line, <= 65 chars, imperative, no trailing period; follow
   the project's PR title convention if it has one (see the skill).
-- Body: sections `## Summary`, `## Changes`, `## Testing`.
+- Body shape: per the `pr` skill - `## Summary` (smallest visual), `## Evidence`
+  (before/after), `## Merge Danger` (door + blast radius); project fixed
+  sections win.
 - Describe only what is actually in the diff. Do not invent anything.
 - If there are no changes - report and stop.
 

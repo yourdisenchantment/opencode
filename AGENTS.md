@@ -104,12 +104,14 @@ Commands (in `commands/`; suggest the right one when it fits):
 - `/task` drafts `tmp/TASK.md`; `/checkpoint` refreshes `tmp/OVERVIEW.md`.
 - `/review` runs `@reviewer` on the changes; `/verify` runs the whole lint,
   typecheck, test and build chain; `/lint` and `/test` check the modified files.
-- `/commit` prepares commits; `/pr` drafts a PR description.
+- `/commit` prepares commits; `/pr` drafts a PR description; `/handoff` writes
+  a handoff document for another agent.
 - `/docs` lists this config; `/learn`, `/rmslop`, `/spellcheck` are helpers.
 
 Session helper files (`ROADMAP.md`, `TASK.md`, `REVIEW.md`, `OVERVIEW.md`,
-`commits/`) live in `tmp/` (gitignored, survive across sessions); the
-`workspace-docs` skill defines their format.
+`JOURNAL.md`, `commits/`) live in `tmp/` (gitignored, survive across sessions);
+the `workspace-docs` skill defines their format and the `ship-log` skill owns
+`JOURNAL.md`.
 
 ## Agent Ship's Log
 

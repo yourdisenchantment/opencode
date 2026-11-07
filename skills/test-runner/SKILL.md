@@ -20,4 +20,5 @@ documentation or non-logic configs changed.
    (pass/skip counts, exit code). Do not create a `tests/` directory or invent a
    test setup if the project has none; say so instead.
 4. If something failed - show the failing assertions and suggest a fix, but do
-   NOT edit yourself (that is `@coder`'s job).
+   NOT edit yourself: hand the fix back to whoever implements (the coding agent
+   or the user).

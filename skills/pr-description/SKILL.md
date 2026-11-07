@@ -22,16 +22,15 @@ is not already in context, gather it first:
 
 ### Body
 
-```
-## Summary
-- What this PR changes (1-3 bullets).
+Follow the `pr` skill for the body shape per section:
 
-## Changes
-- Concrete list of changes, grouped by topic (not by file).
+- `## Summary` - the smallest view that makes the change clear (a diagram,
+  diff sketch, or tree; 1-3 bullets when no visual earns its place).
+- `## Evidence` - concrete before/after: test runs, command output, screenshots.
+- `## Merge Danger` - one-way or two-way door, plus blast radius.
 
-## Testing
-- How it was tested: commands, scenarios. If not tested - say so explicitly.
-```
+Project-specific fixed sections win over this shape when the project's rules
+require them (for example an animated SVG under `### Visual`).
 
 Rules:
 

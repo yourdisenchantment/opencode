@@ -4,10 +4,15 @@ description: Root-cause debugging process. Use for any bug, test failure, build 
 ---
 
 Find the root cause before changing code. A fix that only hides the symptom is
-not a fix. No fix until phase 1 is done.
+not a fix. No fix until the cause is understood.
 
 This skill never commits, pushes, or deletes anything. Git and file removal stay
 with the user.
+
+A hard bug - fuzzy cause, flaky or no repro, already several failed attempts
+this session - must not be improvised: run the `diagnosing-bugs` skill loop and
+start at its Phase 1 (build a feedback loop). This skill is the routine first
+pass and the fallback rules.
 
 ## 1. Investigate
 
@@ -26,8 +31,9 @@ with the user.
 
 - Find similar code that works in the same codebase and list every difference
   from the broken one, however small.
-- When following a reference or documented pattern, read it completely. Check
-  library behavior with the `context7` MCP instead of assuming.
+- When following a reference or documented pattern, read it completely. Verify
+  documented library behavior against the actual docs (a docs MCP or the
+  official docs) instead of assuming.
 
 ## 3. Hypothesize and test
 
@@ -37,16 +43,18 @@ with the user.
 - Wrong? Form a new hypothesis from what you learned. Do not add more changes on
   top of the failed one.
 - If you do not understand something, say so instead of pretending.
+- If this quick loop keeps failing, that is a hard bug: switch to the
+  `diagnosing-bugs` loop (ranked hypotheses, instrumentation, regression test)
+  instead of stacking more attempts.
 
 ## 4. Fix
 
 - Have a reproduction first: an automated test if the project has a test setup,
-  otherwise a small script. If a proper failing test is needed, ask `@reviewer`
-  to write it - `@coder` does not write tests.
+  otherwise a small script.
 - One change that addresses the root cause. No "while I am here" cleanup, no
   bundled refactoring.
 - Prove it: the original reproduction now passes and nothing else broke. Show
-  the command and its output (see "Verification" in AGENTS.md).
+  the command and its output (see "Verification" in the global `AGENTS.md`).
 
 ## Three failed fixes
 
