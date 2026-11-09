@@ -92,7 +92,8 @@ When starting in a new project, run `/init` first (generates the rules file),
 then `/bootstrap` (prepares the `tmp/` workspace).
 
 Commands (in `commands/`; suggest the right one when it fits):
-- `/task` drafts `tmp/TASK.md`; `/checkpoint` refreshes `tmp/OVERVIEW.md`.
+- `/task` drafts `tmp/TASK.md`; `/checkpoint` refreshes `tmp/OVERVIEW.md`;
+  `/summary` rewrites `tmp/PROJECT.md` - a shareable project brief.
 - `/review` runs `@reviewer` on the changes; `/verify` runs the whole lint,
   typecheck, test and build chain; `/lint` and `/test` check the modified files.
 - `/commit` prepares commits; `/pr` drafts a PR description; `/handoff` writes

@@ -57,6 +57,15 @@ Status markers used across the files: `[ ]` todo, `[~]` in progress, `[x]` done,
 - The `ship-log` skill defines format and write rules; create the file on first
   use (header plus format).
 
+## tmp/PROJECT.md - the shareable project brief
+
+- A standalone description of the project for people outside the workspace:
+  idea, stack, nuances, process, current stage. For copy-paste or hand-off of
+  the file itself; must read without any other tmp/ context.
+- Written by the `/summary` command, regenerated wholesale on every run - a
+  generated artifact, never patched incrementally. English by default, unless
+  the user asked for another language.
+
 ## tmp/handoff-<date>-<slug>.md - session handoff
 
 - Written by the `handoff` skill for a fresh agent to continue the work. It
