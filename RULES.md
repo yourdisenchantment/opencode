@@ -61,6 +61,10 @@ an action, good; where it does not, the rule still applies.
   confirmation.
 - **Do not start long-running foreground processes** (dev servers, watchers,
   interactive REPLs). If needed - ask first.
+- **Do not put secrets into network requests.** Credentials, tokens and env
+  values stay out of URLs, headers and bodies sent to external services; an
+  authenticated third-party call goes through the tool that owns the
+  credential (an MCP server, a CLI), not through pasting the secret.
 
 ## Working with Git
 

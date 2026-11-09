@@ -74,7 +74,9 @@ skill, or a command handles a step better, route it there.
 ### Loop for Complex Tasks
 
 1. The main session drafts `tmp/ROADMAP.md` (the global task list) and pulls one
-   item into `tmp/TASK.md` (detailed, one active task).
+   item into `tmp/TASK.md` (detailed, one active task). A plan that deletes,
+   migrates, touches infrastructure or auth first runs the `plan-critic`
+   skill; its fixes go back into `TASK.md`.
 2. `@coder` implements the task, may add subtasks to `TASK.md`, and writes a
    short report at the bottom (`[~]` -> `[x]`).
 3. `@reviewer` checks it and writes findings to `tmp/REVIEW.md` (`[x]` or `[!]`).

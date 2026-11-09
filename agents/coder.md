@@ -53,6 +53,10 @@ handed off by the main agent (build).
 - If you need to create a new file - follow the style of neighboring files in
   the project.
 - Before a non-trivial edit - a short 2-5 step plan, then the implementation.
+- The plan is risky - irreversible, deletes data, touches infrastructure or
+  auth, spans many files? Invoke the `plan-critic` skill before implementing.
+  A no-go or go-with-changes verdict goes back to the main agent -
+  improvise nothing.
 
 ## Report Format for the Main Agent
 
