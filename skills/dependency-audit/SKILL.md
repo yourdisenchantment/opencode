@@ -105,3 +105,6 @@ Use this skill when you need to:
 - If an audit tool is not installed (`pip-audit`, `govulncheck`), say so and
   name the install command instead of installing it. Do not claim a clean scan
   you did not run.
+- The machine's actual scanner inventory lives in the `local-tools` skill
+  (gitleaks, osv-scanner, semgrep are installed here): prefer those over the
+  generic commands above when present.
