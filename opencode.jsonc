@@ -16,10 +16,8 @@
         "~/.config/opencode/CORE.md",
         "~/.config/opencode/RULES.md"
     ],
-    // Experimental features (2026-11-07, opencode 2.2.5). Every flag set to
+    // Experimental features (2026-11-14, opencode 2.3.0). Every flag set to
     // true is on on purpose: release builds default them off.
-    // portable_shell_scanner removed 2026-11-07: deprecated no-op, the shell
-    // permission scanner is always enabled in v2.2.5.
     "experimental": {
         "todo": true,
         "background_compaction": true,
@@ -27,11 +25,13 @@
         "schedules": true,
         "image_generate": true,
         "artifacts": true,
+        "shell_timeout_background": true,
     },
     // Was V1 `reserved`; V1 `prune` has no V2 equivalent (checkpoint-based now).
+    // buffer is a percentage (v2.3.0+): one setting fits any context window.
     "compaction": {
         "auto": true,
-        "buffer": 10000,
+        "buffer": "20%",
     },
     // The global `permissions` below are appended AFTER the built-in rules of every
     // agent and the last match wins, so the broad allows (edit, subagent, question,
@@ -965,6 +965,16 @@
                     "--screenshotMaxHeight=800",
                     "--redactNetworkHeaders",
                 ],
+            },
+            "browse": {
+              "type": "local",
+              "command": [
+                "/Users/pavel/.local/bin/browse",
+                "mcp"
+              ],
+              "environment": {
+                "OPENCODE_BROWSER_RUNTIME": "auto-update"
+              }
             },
         },
     },
