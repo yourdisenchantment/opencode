@@ -33,6 +33,44 @@
         "auto": true,
         "buffer": "20%",
     },
+    // Apple `fm serve` (macOS 27 Foundation Models) on the LAN Mac. Plain
+    // HTTP, no auth - the server is reachable by anyone on the LAN. `system`
+    // is the on-device model with a 4096-token window; `pcc` (Private Cloud
+    // Compute, ~32k) answers only when fm serve runs in Terminal.app. fm
+    // serve is OpenAI-compatible but beta: streamUsage off avoids the
+    // stream_options field it may reject.
+    "providers": {
+        "fm": {
+            "name": "Apple Foundation Models",
+            "package": "@opencode/ai/providers/openai-compatible",
+            "settings": {
+                "baseURL": "http://192.168.1.24:1976/v1",
+            },
+            "compatibility": {
+                "streamUsage": false,
+            },
+            "models": {
+                "system": {
+                    "name": "AFM 3 Core Advanced (on-device)",
+                    "capabilities": {
+                        "tools": true,
+                        "input": ["text"],
+                        "output": ["text"],
+                    },
+                    "limit": { "context": 4096, "output": 2048 },
+                },
+                "pcc": {
+                    "name": "Private Cloud Compute",
+                    "capabilities": {
+                        "tools": true,
+                        "input": ["text"],
+                        "output": ["text"],
+                    },
+                    "limit": { "context": 32768, "output": 8192 },
+                },
+            },
+        },
+    },
     // The global `permissions` below are appended AFTER the built-in rules of every
     // agent and the last match wins, so the broad allows (edit, subagent, question,
     // todowrite) would lift the built-in limits of plan / explore / general. These
