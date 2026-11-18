@@ -128,6 +128,33 @@ It is mandatory for every agent:
 The project files `ROADMAP.md`, `TASK.md`, `REVIEW.md`, `OVERVIEW.md` keep
 the structured plan; the journal is the continuous narrative counterpart.
 
+## Model hints (fm)
+
+The `fm` provider (Apple `fm serve`) has tiny windows, and a session rides a
+fixed overhead before the task even starts: always-loaded instructions plus
+tool schemas are already several thousand tokens, and every file read, command
+run and tool call rides the same window.
+
+- `fm/system` (4096 tokens total) never fits a session here - the loaded
+  instructions alone exceed the window. Never suggest it as a session model;
+  it is a one-shot curl tool only (see the `local-tools` skill).
+- `fm/pcc` (~32k, spends the account's PCC quota, needs fm serve started from
+  Terminal.app) leaves roughly 12-15k tokens for prompt, history and reply.
+
+Offer a switch to `fm/pcc` only when a step meets all three:
+
+- **Self-contained**: everything it needs is already in context - no file
+  reads, no commands, no tool calls for the whole step. Drafting a plan from
+  a brief in hand, formulating a message or README chunk, summarizing a text
+  that is already present.
+- **Small**: prompt + reply together under ~12k tokens.
+- **Cheap to check**: the main model can verify the result at a glance when
+  the session switches back.
+
+When a step matches, offer - do not switch by yourself: "This step can run
+on fm/pcc - switch to it and back after?" The user switches in /models and
+switches back when the step is done.
+
 ## Recovery
 
 If opencode refuses to start because of a broken config, `AGENTS.md`, `RULES.md`

@@ -81,6 +81,11 @@ force push, `npm publish`) is not allowed.
 format and the commit split; hand over copy-paste commands per commit for me to
 run.
 
+Commit cadence: after each change is done and verified, hand over its commit
+command at once - do not stack several completed changes into one big batch at
+the end of the session. Never propose committing a change that has not passed
+its check.
+
 Before committing, verify that staged files do not intersect with `.gitignore`
 (otherwise lint-staged fails with "paths ignored"). Do not bump the package
 version without an explicit command.

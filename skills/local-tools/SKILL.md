@@ -61,6 +61,59 @@ and asks for confirmation on suspicious ones.
 - ollama - local model server; the agent never starts long-running servers
   (see Hard Constraints), and model calls go through the configured providers.
 
+## Apple fm serve (LAN Mac, http://192.168.1.24:1976)
+
+Apple's own macOS 27 `fm` CLI, Foundation Models. OpenAI-compatible chat at
+`http://192.168.1.24:1976/v1`, no auth. Two models:
+
+- `system` - on-device AFM 3, fully local and free, but the window is only
+  **4096 tokens** total (prompt framing, schema and question included; one
+  image costs a flat ~187 tokens).
+- `pcc` - Private Cloud Compute, ~32k window, but it answers only when fm
+  serve was started from Terminal.app, and every request spends the
+  account's PCC quota (check `GET /health`).
+
+Use it for tasks that need privacy (nothing leaves the machine), run
+offline-free, or just cost nothing: summarize or classify a private or bulky
+batch of small texts one-shot each, describe a screenshot, draft a commit
+message for a small diff. It is not for agent loops: the tool schemas of an
+agent session exceed `system`'s window, and `pcc` spends quota. It is beta
+software with quirks recorded in the provider config
+(`compatibility.streamUsage: false`).
+
+For agent-style summarization inside a session, the main model may offer a
+one-step switch to `fm/pcc` for a self-contained formulate / summarize /
+plan step; the switch criteria and the offer-first rule live in the global
+`AGENTS.md`. `system` is a one-shot curl tool only - never a session model.
+
+Licence note: `fm` requires accepting Apple's FM licence once
+(`sudo fm license`), and its clause restricts programmatic access outside
+expressly permitted uses - private use on your own network only, never a
+product.
+
+### One-shot curl patterns
+
+- Summarize / classify with structured output:
+
+```bash
+curl -s http://192.168.1.24:1976/v1/chat/completions \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"system","response_format":{"type":"json_schema",
+      "json_schema":{"name":"t","schema":{"type":"object",
+      "properties":{"category":{"type":"string"}},"required":["category"]}}},
+      "messages":[{"role":"user","content":"..."}]}'
+```
+
+- Describe a screenshot (base64 in a data URL):
+
+```bash
+curl -s http://192.168.1.24:1976/v1/chat/completions \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"system","messages":[{"role":"user",
+      "content":[{"type":"text","text":"What is shown? Any UI errors?"},
+                {"type":"image_url","image_url":{"url":"data:image/png;base64,<b64>"}}]}]}'
+```
+
 ## Agent rules recap
 
 - Scan and inspect freely; they are read-only by design (`gitleaks`/`osv-scanner`/`semgrep` do write nothing outside `tmp/` report output).
